@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Contentlayer generates this directory at build time with cached content and types.
+# We ignore it since it's automatically generated and should not be committed.
+.contentlayer 
