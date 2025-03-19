@@ -77,6 +77,58 @@ src/
 └── components/           # Reusable components (optional)
 ```
 
+## Codebase Learning Path
+
+### 1. Configuration Layer
+Start with these files to understand the project setup:
+```
+1. package.json           # Project dependencies and scripts
+2. next.config.js        # Next.js configuration with Contentlayer
+3. tailwind.config.js    # Styling configuration
+4. postcss.config.js     # CSS processing setup
+5. contentlayer.config.ts # Content management configuration
+```
+
+### 2. Application Foundation
+Explore the base structure:
+```
+1. src/app/layout.tsx    # Root layout (HTML structure, fonts, metadata)
+2. src/app/page.tsx      # Root page component
+3. src/app/globals.css   # Global styles and Tailwind directives
+```
+
+### 3. Core Components
+Understand the main features:
+```
+1. src/components/ui/Home.tsx     # Main page logic and post listing
+2. src/components/ui/PostCard.tsx # Individual post display component
+```
+
+### 4. Content Structure
+Review the data layer:
+```
+1. posts/                # Your markdown content files
+   ├── hello-world.md   # Example post
+   └── ...              # Other posts
+```
+
+### Data Flow Understanding
+1. **Configuration Flow**
+   - next.config.js configures the application
+   - contentlayer.config.ts defines content processing
+   - Markdown files are processed according to these configurations
+
+2. **Component Flow**
+   - layout.tsx provides the application shell
+   - page.tsx serves as the entry point
+   - Home.tsx manages post listing
+   - PostCard.tsx handles individual post display
+
+3. **Content Flow**
+   - Markdown files are processed by Contentlayer
+   - Processed content is available through generated types
+   - Components access and display the content
+
 ## Known Issues and Solutions
 
 ### Configuration Issues
