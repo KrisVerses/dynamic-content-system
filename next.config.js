@@ -20,7 +20,7 @@ const nextConfig = {
 
   // Enable SWC minification for faster builds
   // SWC is a Rust-based compiler that's much faster than Terser
-  swcMinify: true,
+    //   swcMinify: true, Not needed because it is already enabled by default
 }
 
 // Export the Next.js config wrapped with Contentlayer
