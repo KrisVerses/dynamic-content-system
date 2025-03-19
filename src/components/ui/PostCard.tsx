@@ -26,3 +26,21 @@ export function PostCard(post: Post) {
         </div>
     )
 }
+
+// ===== Date Formatting Explanation =====
+// format(parseISO(post.date), 'LLLL d, yyyy')
+// - parseISO(): Converts an ISO string date (e.g., "2024-03-21") into a JavaScript Date object
+// - format(): Takes that Date object and formats it using the pattern 'LLLL d, yyyy'
+// - 'LLLL': Full month name (e.g., "March")
+// - d: Day of the month (e.g., "21")
+// - yyyy: Full year (e.g., "2024")
+// Example output: "March 21, 2024"
+
+// ===== dangerouslySetInnerHTML Explanation =====
+// dangerouslySetInnerHTML={{ __html: post.body.html }}
+// - Used to render HTML content that's been processed by Contentlayer from markdown
+// - "dangerous" because it can expose XSS vulnerabilities if used with untrusted content
+// - Safe in this case because:
+//   1. Content comes from our own markdown files
+//   2. HTML is sanitized by Contentlayer during build
+// - Alternative to using this would require manually parsing and rendering markdown elements
