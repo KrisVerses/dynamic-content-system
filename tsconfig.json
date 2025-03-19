@@ -19,9 +19,28 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"] 
+      // Creates an import alias for Contentlayer's generated files
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".contentlayer/generated"], // Include Contentlayer's generated TypeScript files in the compilation process
   "exclude": ["node_modules"]
 }
+
+//What is difference between adding .contentlayer/generated to the include and paths? 
+/*
+The difference is:
+include: Tells TypeScript "these are files you need to compile and type-check"
+Without this, TypeScript wouldn't know these files exist and should be processed
+Think of it as "what files should TypeScript look at?"
+paths: Creates an import alias that tells TypeScript "when someone writes this import path, look in this location"
+Without this, you'd have to write: import { allPosts } from '../.contentlayer/generated'
+Think of it as "what shortcut name should I use to import these files?"
+A real-world analogy:
+include is like telling your IDE "scan these folders for files"
+paths is like creating a shortcut/alias on your desktop to a deeply nested folder
+You need both:
+include to make TypeScript aware of the files
+paths to import them conveniently in your code
+*/
