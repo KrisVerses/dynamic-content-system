@@ -1,19 +1,26 @@
-@tailwind base;    /* Base styles and reset */
+@tailwind base; /* Base styles and reset */
 @tailwind components; /* Component classes */
 @tailwind utilities; /* Utility classes */
 
 /* Theme Variables - Light Mode Default */
 :root {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #171717;
+  --menu-background: #ffffff;
+  --menu-foreground: #171717;
+  --hamburger-icon: #171717;
 }
 
 /* Dark Theme Override */
 :root[data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --menu-background: #171717;
+  --menu-foreground: #ededed;
+  --hamburger-icon: #ff3366;
 }
 
+/* Keep existing styles... */
 /* Global Styles */
 body {
   background: var(--background);
