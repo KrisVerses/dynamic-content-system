@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import React from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Providers } from '@/components/Providers'
 import Navbar from "@/components/ui/Navbar";
+import Footer from '@/components/ui/Footer'
 
 // Initialize Inter font with optimization
 const inter = Inter({
@@ -23,13 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased min-h-screen`}>
-        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm">
-          <Navbar />
-        </header>
-        <main className="container mx-auto px-4">
-          {children}
-        </main>
+      <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
+        <Providers>
+          <div className="flex-1">
+            <header className="sticky top-0 z-50">
+              <Navbar />
+            </header>
+            <main className="container mx-auto px-4">
+              {children}
+            </main>
+          </div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
