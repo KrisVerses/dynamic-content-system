@@ -1,7 +1,8 @@
-// components/ThemeToggle.tsx
+// components/ui/ThemeToggle.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
+import { BsSunFill, BsMoonStarsFill } from 'react-icons/bs'
 
 function ThemeToggle() {
     // Track theme state
@@ -25,12 +26,59 @@ function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 
-                     transition-colors duration-200 ease-in-out
-                     hover:bg-gray-300 dark:hover:bg-gray-700"
+            className={`
+                relative p-3 rounded-full
+                transition-all duration-500
+                transform hover:scale-110
+                active:scale-95
+                
+                /* Base styles */
+                bg-white dark:bg-primary
+                
+                /* Border and shadow effects */
+                ring-2 
+                ${isDark
+                    ? 'ring-primary shadow-[0_0_16px_rgba(96,165,250,0.5)]'
+                    : 'ring-accent shadow-[0_0_16px_rgba(253,186,116,0.5)]'
+                }
+                
+                /* Container */
+                flex items-center justify-center
+                w-10 h-10
+                overflow-hidden
+            `}
             aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
         >
-            {isDark ? '🌞' : '🌙'}
+            {/* Light mode icon */}
+            <BsSunFill
+                className={`
+                    absolute
+                    transition-all duration-500
+                    ${isDark
+                        ? 'opacity-0 rotate-180 scale-0'
+                        : 'opacity-100 rotate-0 scale-100'
+                    }
+                    w-5 h-5
+                    text-accent
+                    animate-[spin_8s_linear_infinite]
+                    hover:animate-[spin_4s_linear_infinite]
+                `}
+            />
+
+            {/* Dark mode icon */}
+            <BsMoonStarsFill
+                className={`
+                    absolute
+                    transition-all duration-500
+                    ${isDark
+                        ? 'opacity-100 rotate-0 scale-100'
+                        : 'opacity-0 -rotate-180 scale-0'
+                    }
+                    w-4 h-4
+                    text-blue-400
+                    animate-pulse
+                `}
+            />
         </button>
     )
 }

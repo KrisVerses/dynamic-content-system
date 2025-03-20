@@ -29,7 +29,7 @@ const HamburgerMenu = () => {
         </div>
       </button>
       {isOpen && (
-        <div className="absolute right-1/2 left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
+        <div className="absolute right-1/2 left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 dark:text-black">
           <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
             Home
           </Link>

@@ -22,32 +22,34 @@ const Navbar = () => {
   `;
 
   return (
-    <nav className="w-full flex items-center justify-between px-8">
-      {/* Left Section: Logo 
-          flex-1: takes up 1/3 of space
-          items-center: vertically centers content */}
-      <div className="flex-1 flex items-center">
-        <figure className="hidden md:flex items-center">
-          <img
-            src="/images/Logo-Trans.png"
-            alt="Kris Verses Logo"
-            className="w-[140px] h-[140px] object-contain" // Reduced from 200px
-          />
-        </figure>
-        <figure className="md:hidden flex items-center">
-          <img
-            src="/images/KV-Logo-Solid.png"
-            alt="Kris Verses Mobile Logo"
-            className="w-[140px] h-[140px] object-contain" // Reduced from 150px
-          />
-        </figure>
+    <nav className="w-full max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12">
+      {/* Left Section: Logo */}
+      <div className="flex items-center w-[240px]">
+        <Link href="/" passHref>
+          <figure className="hidden md:flex items-center">
+            <img
+              src="/images/Logo-Trans.png"
+              alt="Kris Verses Logo"
+              className="w-[140px] h-[140px] object-contain"
+            />
+          </figure>
+        </Link>
+        <Link href="/" passHref>
+          <figure className="md:hidden flex items-center">
+            <img
+              src="/images/KV-Logo.png"
+              alt="Kris Verses Mobile Logo"
+              className="w-[140px] h-[140px] object-contain"
+            />
+          </figure>
+        </Link>
       </div>
 
       {/* Center Section: Navigation Links */}
-      <div className="flex-1 flex justify-center items-center">
+      <div className="flex-1 flex justify-center items-center mx-8">
         {/* Desktop Navigation */}
-        <ul className="space-x-10 border border-black p-2 px-6 rounded-full shadow-md bg-gray-50/50 hidden sm:flex">
-          {/* Navigation Links with active state highlighting */}
+        <ul className="space-x-8 border border-black/30 p-2.5 px-6 rounded-full 
+                      shadow-md bg-gray-50/50 backdrop-blur-sm hidden sm:flex dark:text-black">
           <Link href="/" passHref>
             <li className={`${linkStyles} ${pathname === "/" ? "text-accent" : ""}`}>
               Home
@@ -72,7 +74,7 @@ const Navbar = () => {
       </div>
 
       {/* Right Section: Theme Toggle */}
-      <div className="flex-1 flex justify-end items-center">
+      <div className="w-[240px] flex justify-end items-center">
         <ThemeToggle />
       </div>
     </nav>
@@ -82,48 +84,76 @@ const Navbar = () => {
 export default Navbar;
 
 /*
-TAILWIND BEST PRACTICES EXPLANATION:
-
-1. Layout Structure:
-   - Use flex with flex-1 for equal thirds layout
-   - items-center ensures vertical alignment
-   - justify-between creates equal spacing
-
-2. Responsive Design:
-   - hidden/flex classes for conditional rendering
-   - md: prefix for desktop styles
-   - sm: prefix for tablet and up
-
-3. Image Handling:
-   - object-contain preserves aspect ratio
-   - Explicit dimensions prevent layout shift
-   - Responsive sizes for different screens
-
-4. Interactive Elements:
-   - hover: states for interactions
-   - after: pseudo-elements for animations
-   - transition classes for smooth effects
-
-5. Organization:
-   - Group related classes
-   - Use comments to separate sections
-   - Maintain consistent spacing
-*/
-
-/*
- * EXPLANATION:
- * 1. "use client": This directive at the top of the file indicates that this component should be rendered on the client side.
- *    This is necessary because the component uses client-side hooks like usePathname, which are not compatible with server-side rendering.
- * 2. passHref: This prop is used in the Link component to ensure that the href attribute is passed to the child element (li in this case).
- *    This is necessary when the child element is not an anchor (<a>) tag, as the Link component normally expects an anchor tag as its child.
- * 3. Underline Animation:
- *    - relative: Sets the position of the link to relative, which is necessary for the ::after pseudo-element to be positioned absolutely within the link.
- *    - after:content-['']: Creates an empty content for the ::after pseudo-element.
- *    - after:absolute: Positions the ::after pseudo-element absolutely within the link.
- *    - after:left-0 after:bottom-0: Positions the ::after pseudo-element at the bottom left of the link.
- *    - after:w-full after:h-[2px]: Sets the width and height of the ::after pseudo-element to create the underline.
- *    - after:bg-accent: Sets the background color of the ::after pseudo-element to the accent color.
- *    - after:scale-x-0 after:origin-bottom-right: Initially scales the ::after pseudo-element to 0 on the x-axis and sets the transform origin to the bottom right.
- *    - hover:after:origin-bottom-left hover:after:scale-x-100: On hover, changes the transform origin to the bottom left and scales the ::after pseudo-element to 100% on the x-axis.
- *    - after:transition-transform after:duration-300: Adds a transition effect to the transform property with a duration of 300ms.
+ * NAVBAR LAYOUT & CENTERING STRATEGY
+ * =================================
+ *
+ * 1. Container Width Management
+ *    -------------------------
+ *    max-w-7xl: Limits max width to 1280px to prevent excessive stretching
+ *    mx-auto: Centers the navbar container horizontally
+ *    w-full: Ensures full width up to the max width
+ *    
+ *    Example:
+ *    <nav className="w-full max-w-7xl mx-auto flex items-center justify-between">
+ *
+ * 2. Three-Column Layout System
+ *    -------------------------
+ *    Left/Right sections: w-[240px]
+ *    - Provides consistent space for logo and theme toggle
+ *    - Prevents layout shift when content changes
+ *    
+ *    Center section: flex-1
+ *    - Allows dynamic expansion of navigation area
+ *    - Maintains proper spacing between fixed-width sides
+ *
+ * 3. Spacing Architecture
+ *    -------------------
+ *    Container padding: px-6 md:px-12
+ *    Navigation gaps: space-x-8
+ *    Center section margin: mx-8
+ *    Purpose: Creates consistent spacing and prevents content overlap
+ *
+ * 4. Responsive Design
+ *    ----------------
+ *    Desktop navigation: sm:flex
+ *    Mobile menu: sm:hidden
+ *    Logo sizing: Adaptive based on breakpoints
+ *    Padding: Responsive using Tailwind prefixes
+ *
+ * 5. Visual Alignment
+ *    ---------------
+ *    Vertical centering: items-center
+ *    Section spacing: justify-between
+ *    Navigation centering: justify-center
+ *    Theme toggle position: justify-end
+ *
+ * 6. Implementation Benefits
+ *    ---------------------
+ *    - Maintains symmetry across screen sizes
+ *    - Prevents excessive content spread
+ *    - Ensures consistent alignment and spacing
+ *    - Facilitates responsive adjustments
+ *
+ * UNDERLINE ANIMATION
+ * ==================
+ * Base setup:
+ *    relative: Positions link for pseudo-element
+ *    after:content-[''] after:absolute: Creates underline element
+ *    after:left-0 after:bottom-0: Positions at bottom
+ *    after:w-full after:h-[1px]: Sets dimensions
+ *
+ * Animation:
+ *    after:bg-accent: Sets underline color
+ *    after:scale-x-0: Initially hidden
+ *    after:origin-bottom-right: Starting point
+ *    hover:after:origin-bottom-left: Transition point
+ *    hover:after:scale-x-100: Show on hover
+ *    after:transition-transform after:duration-300: Smooth animation
+ *
+ * CLIENT-SIDE RENDERING
+ * ====================
+ * - Component marked with "use client"
+ * - Required for usePathname hook
+ * - Enables client-side interactivity
+ * - Link usage optimized with passHref
  */
