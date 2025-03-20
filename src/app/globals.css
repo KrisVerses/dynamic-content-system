@@ -1,20 +1,60 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@tailwind base;    /* Base styles and reset */
+@tailwind components; /* Component classes */
+@tailwind utilities; /* Utility classes */
 
+/* Theme Variables - Light Mode Default */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark Theme Override */
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
+/* Global Styles */
 body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* Image Container Reset */
+figure {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Image Base Styles */
+img {
+  margin: 0;
+  padding: 0;
+  max-height: 200px; /* Consistent maximum height */
+}
+
+/*
+STYLING BEST PRACTICES:
+
+1. CSS Variables:
+   - Use for theme values
+   - Enables easy theme switching
+   - Maintains consistency
+
+2. Media Queries:
+   - Use for system theme detection
+   - Fallback to light theme
+   - Smooth transitions
+
+3. Reset Styles:
+   - Remove default margins/padding
+   - Consistent cross-browser display
+   - Predictable layouts
+
+4. Performance:
+   - Minimal global styles
+   - Use Tailwind utilities when possible
+   - Optimize for reuse
+*/
